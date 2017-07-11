@@ -13,7 +13,6 @@ export const employeeUpdate = ({prop,value}) => {
   payload : {prop , value}
 };
 };
-//hello
 export const employeeCreate = ({name,phone,shift}) => {
    const {currentUser}= firebase.auth();
    return(dispatch) => {
