@@ -11,7 +11,7 @@ class EmployeeForm extends Component {
       <CardSection>
         <Input
            text="Name"
-           placeholder = "malik"
+           placeholder = "Name"
            value= {this.props.name}
            onChangeText= {value => this.props.employeeUpdate({prop: 'name', value})}
         />

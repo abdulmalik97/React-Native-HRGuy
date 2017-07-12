@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import {Button , Card,CardSection} from './Common';
 import {connect} from 'react-redux';
 import EmployeeForm from './EmployeeForm';
+import {Actions} from "react-native-router-flux";
 import {employeeUpdate,employeeSave} from '../Actions';
 import _ from 'lodash';
 
@@ -13,17 +14,12 @@ class EmployeeEdit extends Component {
     });
   }
 
-
-
   onButtonPress() {
       const { name, phone, shift  } = this.props;
-      console.log({name});
-
+      Actions.pop();
       this.props.employeeSave({ name, phone, shift, uid: this.props.employee.uid });
     }
   render(){
-
-
     return (
       <View>
         <Card>
