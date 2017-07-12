@@ -6,6 +6,8 @@ import { CardSection } from './Common';
 class ListItem extends Component{
   onRowPress() {
     Actions.employeeedit({ employee: this.props.emp });
+    //Encountered an error here , had to pass this.props.emp.val instead of
+    //just this.props.emp
   }
 
   render() {

@@ -8,15 +8,16 @@ import _ from 'lodash';
 
 class EmployeeEdit extends Component {
   componentWillMount(){
-    _.each(this.props.employee, (value, prop) => {
-      this.props.employeeUpdate({ value,prop});
+    _.each(this.props.employee.val, (value, prop) => {
+      this.props.employeeUpdate({ prop,value});
     });
   }
 
 
 
   onButtonPress() {
-      const { name, phone, shift } = this.props;
+      const { name, phone, shift  } = this.props;
+      console.log({name});
 
       this.props.employeeSave({ name, phone, shift, uid: this.props.employee.uid });
     }
