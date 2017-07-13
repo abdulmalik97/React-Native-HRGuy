@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView,View } from 'react-native';
+import { ListView, View } from 'react-native';
 import { employeesFetch } from '../Actions';
 import ListItem from './ListItem';
+import { Spinner } from './Common';
 
 class EmployeeList extends Component {
   componentWillMount() {
@@ -19,11 +20,11 @@ class EmployeeList extends Component {
   }
   createDataSource({ employees }) {
     const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
+      rowHasChanged: (r1, r2) => r1 !== r2,
     });
 
     this.dataSource = ds.cloneWithRows(employees); // EMPLOYEES WAS SUPPOSED TO BE IN
-    //CURLY BRACES!!!!
+    // CURLY BRACES!!!!
   }
 
   renderRow(employee) {
@@ -32,22 +33,22 @@ class EmployeeList extends Component {
 
   render() {
     return (
-      <View style={{backgroundColor: '#FFFCFC',flex:1,margin: 5,borderRadius: 12}}>
-      <ListView
-        enableEmptySections
-        dataSource={this.dataSource}
-        renderRow={this.renderRow}
-      />
+      <View
+        style={{
+          backgroundColor: '#FFFCFC',
+          flex: 1,
+          margin: 5,
+          borderRadius: 12,
+        }}
+      >
+        <ListView enableEmptySections dataSource={this.dataSource} renderRow={this.renderRow} />
       </View>
     );
   }
 }
 
-const mapStateToProps = state => {
-
-  const employees = _.map(state.auth.employeee, (val, uid) => {
-    return { uid,val };
-  });
+const mapStateToProps = (state) => {
+  const employees = _.map(state.auth.employeee, (val, uid) => ({ uid, val }));
   return { employees };
 };
 

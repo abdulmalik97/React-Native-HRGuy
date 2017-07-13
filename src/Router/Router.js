@@ -9,8 +9,19 @@ const RouterComponent =()=> {
   return(
     <Router>
 
-          <Scene key="auth" initial>
-              <Scene key="login" component={ LoginForm} title="Please Login" initial  />
+          <Scene key="auth" initial >
+              <Scene key="login" component={ LoginForm}
+                     title="Please Login"
+                     initial
+                     hideNavBar
+                    //  navigationBarStyle={{opacity:0.3}}
+                    //  titleStyle= {{fontSize:29}}
+                    //  titleOpacity= '0.9'
+                    //  animation= "fade"
+                    //  duration= '5000'
+                    //  direction= "vertical"
+
+                    />
 
               <Scene
               key="employeelist"

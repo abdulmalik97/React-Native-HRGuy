@@ -5,3 +5,4 @@ export * from './CardSection';
 export * from './LoginForm';
 export * from './Input';
 export * from './Spinner';
+export * from './Confirm';
