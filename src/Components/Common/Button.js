@@ -36,6 +36,7 @@ const styles=StyleSheet.create({
     borderColor:'rgb(0, 4, 9)',
     paddingTop: 10,
     paddingBottom: 10,
+    textAlign: 'center',
 
 
   }
