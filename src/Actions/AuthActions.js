@@ -80,11 +80,19 @@ export const loginUser = ({ email, password }) => (dispatch) => {
     .then(user => loginUserSuccess(dispatch, user))
     .catch((error) => {
       console.log(error);
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(user => loginUserSuccess(dispatch, user))
-        .catch(() => loginUserFail(dispatch));
+      loginUserFail(dispatch, (error: error));
+    });
+};
+
+export const createUser = ({ email, password }) => (dispatch) => {
+  dispatch({ type: LOGIN_USER });
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(user => loginUserSuccess(dispatch, user))
+    .catch((error) => {
+      console.log(error);
+      loginUserFail(dispatch, (error: error));
     });
 };
 
@@ -96,8 +104,10 @@ const loginUserSuccess = (dispatch, user) => {
   Actions.employeelist();
 };
 
-const loginUserFail = (dispatch) => {
+const loginUserFail = (dispatch, error) => {
   dispatch({
     type: LOGIN_USER_FAIL,
+    payload: error,
   });
+  console.log(error);
 };

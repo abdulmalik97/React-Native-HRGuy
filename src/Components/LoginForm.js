@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, StatusBar, KeyboardAvoidingView, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
-import { emailChanged, passwordChanged, loginUser } from '../Actions';
+import { emailChanged, passwordChanged, loginUser, createUser } from '../Actions';
 import { Card, CardSection, Input, Button, Spinner } from './Common';
 
 class LoginForm extends Component {
@@ -12,20 +12,31 @@ class LoginForm extends Component {
   onPasswordChange(text) {
     this.props.passwordChanged(text);
   }
-  onButtonPress() {
+  onLoginButtonPress() {
     const { email, password } = this.props;
     this.props.loginUser({ email, password });
+  }
+  onSignupButtonPress() {
+    const { email, password } = this.props;
+    this.props.createUser({ email, password });
   }
   renderButton() {
     if (this.props.loading) {
       return <Spinner size="small" />;
     }
     return (
-      <Button
-        text="Login"
-        onPress={this.onButtonPress.bind(this)}
-        style={{ alignSelf: 'center' }}
-      />
+      <View style={{ flexDirection: 'row' }}>
+        <Button
+          text="Login"
+          onPress={this.onLoginButtonPress.bind(this)}
+          style={{ alignSelf: 'center' }}
+        />
+        <Button
+          text="Sign Up"
+          onPress={this.onSignupButtonPress.bind(this)}
+          style={{ alignSelf: 'center' }}
+        />
+      </View>
     );
   }
 
@@ -42,7 +53,7 @@ class LoginForm extends Component {
         >
           <Image source={require('../Logo/manager.png')} style={{ height: 200, width: 200 }} />
         </View>
-        <KeyboardAvoidingView behavior="padding" style={{ flex: 2 }}>
+        <KeyboardAvoidingView style={{ flex: 2 }}>
           <Card style={{ opacity: 0.8 }}>
             <StatusBar translucent barStyle="dark-content" />
             <CardSection>
@@ -65,17 +76,19 @@ class LoginForm extends Component {
             </CardSection>
 
             <CardSection>
-              <Text
-                style={{
-                  fontSize: 18,
-                  color: 'red',
-                  alignSelf: 'center',
-                  backgroundColor: '#FFFCFC',
-                }}
-              >
-                {this.props.error}
-              </Text>
-              {this.renderButton()}
+              <View style={{ flexDirection: 'column' }}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    color: 'red',
+                    alignSelf: 'center',
+                    backgroundColor: '#FFFCFC',
+                  }}
+                >
+                  {this.props.error}
+                </Text>
+                {this.renderButton()}
+              </View>
             </CardSection>
           </Card>
         </KeyboardAvoidingView>
@@ -104,4 +117,5 @@ export default connect(mapStateToProps, {
   emailChanged,
   passwordChanged,
   loginUser,
+  createUser,
 })(LoginForm);
